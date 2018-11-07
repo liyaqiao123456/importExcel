@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neo.mapper.TbuserinfowithaddressMapper">
+    <resultMap id="BaseResultMap" type="com.neo.entity.TbUserinfoWithAddress">
+        <association property="agent"
+                     resultMap="com.neo.mapper.TbagentMapper.BaseResultMap"/>
+        <association property="useraddress"
+                     resultMap="com.neo.mapper.TbUserAddressMapper.BaseResultMap"/>
+    </resultMap>
+
+    <select id="getUserinfo" resultType="com.neo.entity.userinfoDto" parameterType="java.lang.Integer">
+        SELECT * FROM
+        agent a
+        LEFT JOIN useraddress u ON a.job_number = u.job_number
+        where a.job_number = #{job_number}
+    </select>
+</mapper>
+
+<!-- LEFT JOIN useraddress u ON a.job_number = u.job_number-->
